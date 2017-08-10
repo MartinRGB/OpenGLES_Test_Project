@@ -21,7 +21,7 @@ runtime.load([
     // its value to the renderTarget of a cubeCamera we create
     THREE.ImageUtils.crossOrigin = '';
     var urls = [ 'posx', 'negx', 'posy', 'negy', 'posz', 'negz' ].map( ( url ) => {
-        return 'https://s3-us-west-1.amazonaws.com/shader-frog/' + url + '_lanc_chapel.jpg';
+        return 'https://s3-us-west-1.amazonaws.com/shader-frog/' + url + 'crate.jpg';
     });
     materialTop.uniforms.iChannel0.value = THREE.ImageUtils.loadTextureCube( urls );
     meshTop.material = materialTop;
