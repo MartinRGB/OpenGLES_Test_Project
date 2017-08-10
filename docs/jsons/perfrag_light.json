@@ -17,11 +17,11 @@
       "useToggle": false,
       "toggle": null,
       "description": "",
-      "value": {
-        "r": 0,
-        "g": 0,
-        "b": 1
-      },
+      // "value": {
+      //   "r": 0,
+      //   "g": 0,
+      //   "b": 1
+      // }
     },
     "time": {
       "name": "time",
@@ -52,6 +52,11 @@
       "description": ""
       "runtime": {
         "texture": null
+      },
+      "value": {
+        "r": 0,
+        "g": 0,
+        "b": 1
       }
     }
   },
