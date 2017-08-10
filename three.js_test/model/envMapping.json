@@ -1,0 +1,97 @@
+{
+  "id": 1675,
+  "name": "14_2_envMapping",
+  "fragment": "/**\n* Example Fragment Shader\n* Sets the color and alpha of the pixel by setting gl_FragColor\n*/\n\n// Set the precision for data types used in this shader\nprecision highp float;\nprecision highp int;\n\n// Default THREE.js uniforms available to both fragment and vertex shader\nuniform mat4 modelMatrix;\nuniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform mat4 viewMatrix;\nuniform mat3 normalMatrix;\n\n// Default uniforms provided by ShaderFrog.\nuniform vec3 cameraPosition;\nuniform float time;\n\n// A uniform unique to this shader. You can modify it to the using the form\n// below the shader preview. Any uniform you add is automatically given a form\n#define color vec3(1.,0.5,0.)\n#define lightPosition vec3(0.,0.,2.)\n\n// Example varyings passed from the vertex shader\nvarying vec3 vPosition;\nvarying vec3 vNormal;\nvarying vec2 vUv;\nvarying vec2 vUv2;\n\n// ------------------------- this example -------------------------\n\n#define u_mvInverseMatrix normalMatrix\n#define u_mvpMatrix projectionMatrix * modelViewMatrix\n\nuniform sampler2D s_baseMap;\nuniform sampler2D s_bumpMap;\nuniform samplerCube s_envMap;\n\nvarying vec2 v_texcoord;\nvarying vec3 v_lightDirection;\nvarying vec3 v_normal;\nvarying vec3 v_tangent;\nvarying vec3 v_bitangent;\n\nvoid main() {\n\n    // //Calculate the real position of this pixel in 3d space, taking into account\n    // //the rotation and scale of the model. It's a useful formula for some effects.\n    // //This could also be done in the vertex shader\n    // vec3 worldPosition = ( modelMatrix * vec4( vPosition, 1.0 )).xyz;\n\n    // // Calculate the normal including the model rotation and scale\n    // vec3 worldNormal = normalize( vec3( modelMatrix * vec4( vNormal, 0.0 ) ) );\n\n    // vec3 lightVector = normalize( lightPosition - worldPosition );\n\n    // // An example simple lighting effect, taking the dot product of the normal\n    // // (which way this pixel is pointing) and a user generated light position\n    // float brightness = dot( worldNormal, lightVector );\n\n    // // Fragment shaders set the gl_FragColor, which is a vector4 of\n    // // ( red, green, blue, alpha ).\n    // gl_FragColor = vec4( color * brightness, 1.0 );\n    \n    // ------------------------- this example -------------------------\n    \n    // 获取基础贴图\n    vec4 baseColor = texture2D(s_baseMap,vUv);\n    \n    // 从法线贴图中获取切线空间\n    vec3 normal = texture2D(s_bumpMap,vUv).xyz;\n    normal = normalize(normal*2. -1.);\n    \n    // 将法线量转换到世界空间\n    mat3 tangentToWorldMat = mat3(v_tangent,v_bitangent,v_normal);\n    \n    normal = normalize(tangentToWorldMat * normal);\n    \n    vec3 lightDirection = normalize(v_lightDirection);\n    \n    // 计算光线和法线的夹角\n    float nDotL = dot(normal,lightDirection);\n    \n    // 计算反射向量\n    vec3 reflection = (2. * normal * nDotL) - lightDirection;\n    \n    vec4 envColor = textureCube(s_envMap,reflection);\n    \n    \n    gl_FragColor = 0.5*baseColor + envColor;\n\n}\n\n\n\n\n",
+  "vertex": "/**\n* Example Vertex Shader\n* Sets the position of the vertex by setting gl_Position\n*/\n\n// Set the precision for data types used in this shader\nprecision highp float;\nprecision highp int;\n\n// Default THREE.js uniforms available to both fragment and vertex shader\n// = object.matrixWorld\nuniform mat4 modelMatrix;\n// = camera.matrixWorldInverse * object.matrixWorld\nuniform mat4 modelViewMatrix;\n// = camera.projectionMatrix\nuniform mat4 projectionMatrix;\n// = camera.matrixWorldInverse\nuniform mat4 viewMatrix;\n// = inverse transpose of modelViewMatrix\nuniform mat3 normalMatrix;\n// = camera position in world space\nuniform vec3 cameraPosition;\n\nuniform float time;\n\n// Default attributes provided by THREE.js. Attributes are only available in the\n// vertex shader. You can pass them to the fragment shader using varyings\nattribute vec3 position;\nattribute vec3 normal;\nattribute vec2 uv;\nattribute vec2 uv2;\nattribute vec4 tangent;\n\n// Examples of variables passed from vertex to fragment shader\nvarying vec3 vPosition;\nvarying vec3 vNormal;\nvarying vec2 vUv;\nvarying vec2 vUv2;\n\n// ------------------------- this example -------------------------\n\n#define u_mvpMatrix projectionMatrix * modelViewMatrix\n#define u_mvInverseMatrix normalMatrix\nuniform vec3 u_lightPosition;\n\nvarying vec3 v_lightDirection;\nvarying vec3 v_normal;\nvarying vec3 v_tangent;\nvarying vec3 v_bitangent;\nvarying vec2 v_texcoord;\n\nvoid main() {\n\n    // // To pass variables to the fragment shader, you assign them here in the\n    // // main function. Traditionally you name the varying with vAttributeName\n    // vNormal = normal;\n    // vUv = uv;\n    // vUv2 = uv2;\n    // vPosition = position;\n\n    // // This sets the position of the vertex in 3d space. The correct math is\n    // // provided below to take into account camera and object data.\n    // gl_Position = u_mvpMatrix * vec4( position, 1.0 );\n    \n    // ------------------------- this example -------------------------\n    \n    // 将光线坐标转换为世界坐标，然后计算到顶点距离\n    vec3 lightPositionWorld = (modelViewMatrix * vec4(u_lightPosition,1.0)).xyz;\n    vec3 lightDirectionWorld = lightPositionWorld - position;\n    \n    v_lightDirection = lightDirectionWorld;\n    \n    v_normal = normalize( normal );\n    v_tangent = normalize( tangent.xyz );\n    v_bitangent = normalize( cross( v_normal, v_tangent ) * tangent.w );\n    v_texcoord = vUv;\n    vUv = uv.xy;\n    \n    gl_Position = u_mvpMatrix * vec4(position,1.0);\n    \n\n}",
+  "uniforms": {
+    "cameraPosition": {
+      "name": "cameraPosition",
+      "displayName": null,
+      "type": "v3",
+      "glslType": "vec3",
+      "useGridHelper": false,
+      "useRange": false,
+      "range": null,
+      "isRandom": false,
+      "randomRange": null,
+      "useToggle": false,
+      "toggle": null,
+      "description": ""
+    },
+    "time": {
+      "name": "time",
+      "displayName": null,
+      "type": "f",
+      "glslType": "float",
+      "useGridHelper": false,
+      "useRange": false,
+      "range": null,
+      "isRandom": false,
+      "randomRange": null,
+      "useToggle": false,
+      "toggle": null,
+      "description": ""
+    },
+    "u_lightPosition": {
+      "name": "u_lightPosition",
+      "displayName": null,
+      "type": "v3",
+      "glslType": "vec3",
+      "useGridHelper": false,
+      "useRange": false,
+      "range": null,
+      "isRandom": false,
+      "randomRange": null,
+      "useToggle": false,
+      "toggle": null,
+      "description": ""
+    },
+    "s_baseMap": {
+      "name": "s_baseMap",
+      "displayName": null,
+      "type": "t",
+      "glslType": "sampler2D",
+      "useGridHelper": false,
+      "useRange": false,
+      "range": null,
+      "isRandom": false,
+      "randomRange": null,
+      "useToggle": false,
+      "toggle": null,
+      "description": ""
+    },
+    "s_envMap": {
+      "name": "s_envMap",
+      "displayName": null,
+      "type": "t",
+      "glslType": "samplerCube",
+      "useGridHelper": false,
+      "useRange": false,
+      "range": null,
+      "isRandom": false,
+      "randomRange": null,
+      "useToggle": false,
+      "toggle": null,
+      "description": ""
+    },
+    "s_bumpMap": {
+      "name": "s_bumpMap",
+      "displayName": null,
+      "type": "t",
+      "glslType": "sampler2D",
+      "useGridHelper": false,
+      "useRange": false,
+      "range": null,
+      "isRandom": false,
+      "randomRange": null,
+      "useToggle": false,
+      "toggle": null,
+      "description": ""
+    }
+  },
+  "url": "http://shaderfrog.com/app/view/1675",
+  "user": {
+    "username": "MartinRGB",
+    "url": "http://shaderfrog.com/app/profile/andrewray"
+  }
+}
