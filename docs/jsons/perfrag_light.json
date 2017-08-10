@@ -16,7 +16,12 @@
       "randomRange": null,
       "useToggle": false,
       "toggle": null,
-      "description": ""
+      "description": "",
+      "value": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
     },
     "time": {
       "name": "time",
@@ -45,6 +50,9 @@
       "useToggle": false,
       "toggle": null,
       "description": ""
+      "runtime": {
+        "texture": null
+      }
     }
   },
   "url": "http://shaderfrog.com/app/view/1665",
