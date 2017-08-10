@@ -878,7 +878,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 <script src="js/three.min.js"></script>
 <script src="js/shaderfrog-runtime.min.js"></script>
-<script src="js/ShaderRuntime.js"></script>
 <script>
   var scene, camera, renderer;
   var geometry, material, mesh;
@@ -919,7 +918,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
     var material = runtime.get(shaders[ 0 ].name);
 
-    mesh.material = materialTop;
+    mesh.material = material;
 });
   
 
