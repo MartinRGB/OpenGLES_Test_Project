@@ -1,5 +1,5 @@
 var runtime = new ShaderFrogRuntime(),
-    width = 800, height = 600,
+    aspectRatio = 0.75,
     clock = new THREE.Clock(),
     camera, cubeCamera, scene, renderer, meshTop, meshBottom, cubeCamera, leftSphere, rightSphere;
 
@@ -9,7 +9,6 @@ var materialTopShader;
 
 // Load multiple ShaderFrog shaders
 runtime.load([
-    'https://raw.githubusercontent.com/MartinRGB/OpenGL_Shading_Launguage_Notes/master/docs/jsons/perfrag_light.json',
     'https://raw.githubusercontent.com/AndrewRayCode/ShaderFrog-Runtime/master/example/Water_or_Oil.json'
 ], function( shaders ) {
 
@@ -25,8 +24,7 @@ runtime.load([
     // its value to the renderTarget of a cubeCamera we create
     //materialTop.uniforms.reflectionSampler.value = cubeCamera.renderTarget;
     //materialTopShader.uniforms.lightPosition = new THREE.Vector3( 1000000, 100, 1000 )
-    //materialTopShader.uniforms.cameraPosition = new THREE.Vector3( 1, 1, 1 )
-    meshTop.material = materialTopShader;
+    meshTop.material = materialTopShader
 
     // ShaderFrog shader 2 (oily effect)
     // var materialBottom = runtime.get( shaders[ 1 ].name );
@@ -46,7 +44,7 @@ function init() {
     scene = new THREE.Scene();
 
     // Cameras
-    camera = new THREE.PerspectiveCamera( 50, width / height, 0.1, 1000 );
+    camera = new THREE.PerspectiveCamera( 50, 1/aspectRatio, 0.1, 1000 );
     camera.position.z = 100;
     scene.add( camera );
     runtime.registerCamera( camera );
@@ -58,17 +56,7 @@ function init() {
     var topGeometry = new THREE.SphereGeometry( 20, 100, 100 );
     //let material = new THREE.MeshLambertMaterial({ color: 0xffffff })
     meshTop = new THREE.Mesh( topGeometry);
-    meshTop.position.y = 20;
     scene.add( meshTop );
-
-    // Add ambient light
-    let ambientLight = new THREE.AmbientLight(0x404040)
-    scene.add(ambientLight)
-
-    // Add a pointlight
-    let pointLight = new THREE.PointLight(0xffffff, 1, 1000)
-    pointLight.position.set(50, 50, 50)
-    scene.add( pointLight )
 
     // Second main object
     // var bottomGeometry = new THREE.SphereGeometry( 20, 10, 10 );
@@ -105,10 +93,35 @@ function init() {
     // rightSphere.position.x += 45;
     // scene.add(rightSphere);
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize( width, height );
+    var body = document.getElementById("wrap")
 
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setClearColor( 0x000000, 1 );
+    renderer.setSize( body.offsetWidth, body.offsetWidth*aspectRatio);
     document.getElementById( 'canvas' ).appendChild( renderer.domElement );
+
+    //Oribit
+    //var orbit = new THREE.OrbitControls( camera, renderer.domElement );
+    //orbit.enableZoom = false;
+
+    //lights
+    var lights = [];
+    lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+    lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+    lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+    lights[ 0 ].position.set( 0, 200, 0 );
+    lights[ 1 ].position.set( 100, 200, 100 );
+    lights[ 2 ].position.set( - 100, - 200, - 100 );
+    scene.add( lights[ 0 ] );
+    scene.add( lights[ 1 ] );
+    scene.add( lights[ 2 ] );
+
+    window.addEventListener( 'resize', function () {
+                camera.aspect = 1/aspectRatio;
+                camera.updateProjectionMatrix();
+                renderer.setSize( body.offsetWidth, body.offsetWidth*aspectRatio);
+    }, false );
 
 }
 
@@ -121,8 +134,8 @@ function animate() {
 
 function render() {
 
-    meshTop.rotation.x += 0.01;
-    meshTop.rotation.y += 0.02;
+    meshTop.rotation.x += 0.005;
+    meshTop.rotation.y += 0.005;
 
     time = clock.getElapsedTime();
 
