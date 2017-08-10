@@ -16,12 +16,7 @@
       "randomRange": null,
       "useToggle": false,
       "toggle": null,
-      "description": "",
-      // "value": {
-      //   "r": 0,
-      //   "g": 0,
-      //   "b": 1
-      // }
+      "description": ""
     },
     "time": {
       "name": "time",
