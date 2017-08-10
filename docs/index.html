@@ -916,9 +916,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     // var materialBottom = runtime.get( shaders[ 1 ].name );
     // meshBottom.material = materialBottom;
 
-    var material = runtime.get(shaders[ 0 ].name);
+    material = runtime.get(shaders[ 0 ].name);
 
-    mesh.material = material;
+    //mesh.material = material;
 });
   
 
@@ -938,7 +938,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
     camera.position.z = 1000;
 
     geometry = new THREE.BoxGeometry( 200, 200, 200 );
-    material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+    //material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: false } );
 
     mesh = new THREE.Mesh( geometry, material );
     scene.add( mesh );
