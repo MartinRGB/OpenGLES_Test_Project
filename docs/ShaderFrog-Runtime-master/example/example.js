@@ -18,7 +18,7 @@ runtime.load([
 
     // Get the Three.js material you can assign to your objects
     // ShaderFrog shader 1 (reflection effect)
-    materialTopShader = runtime.get( shaders[ 1 ].name );
+    materialTopShader = runtime.get( shaders[ 0 ].name );
 
     // You set uniforms the same way as a regular THREE.js shader. In this
     // case, the shader uses a cube camera for reflection, so we have to set
