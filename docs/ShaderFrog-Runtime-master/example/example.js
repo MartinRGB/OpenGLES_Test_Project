@@ -10,7 +10,7 @@ var materialTopShader;
 // Load multiple ShaderFrog shaders
 runtime.load([
     'https://raw.githubusercontent.com/MartinRGB/OpenGL_Shading_Launguage_Notes/master/docs/jsons/perfrag_light.json',
-    'https://s3-us-west-1.amazonaws.com/shader-frog/example/Water_or_Oil.json'
+    'https://raw.githubusercontent.com/AndrewRayCode/ShaderFrog-Runtime/master/example/Water_or_Oil.json'
 ], function( shaders ) {
 
     // `shaders` will be an array with the material data in the same order you
@@ -18,7 +18,7 @@ runtime.load([
 
     // Get the Three.js material you can assign to your objects
     // ShaderFrog shader 1 (reflection effect)
-    materialTopShader = runtime.get( shaders[ 0 ].name );
+    materialTopShader = runtime.get( shaders[0].name );
 
     // You set uniforms the same way as a regular THREE.js shader. In this
     // case, the shader uses a cube camera for reflection, so we have to set
