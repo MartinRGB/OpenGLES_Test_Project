@@ -227,6 +227,8 @@
       '../textures/metal.jpg',
       function ( texture ) {
         //### OBJ1 - Shape
+        texture.repeat.x = 0.5;
+        texture.repeat.y = 0.25;
         geometry = new THREE.ConeGeometry( 1, 2,32 );
         //### OBJ1 - Load Texture
         material = new THREE.MeshBasicMaterial( {
@@ -239,9 +241,9 @@
 
         //### OBJ1 - Wireframe
         var geo = new THREE.EdgesGeometry( mesh.geometry ); // or WireframeGeometry
-        var mat = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 10 } );
+        var mat = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 1 } );
         var wireframe = new THREE.LineSegments( geo, mat );
-        mesh.add( wireframe );
+        //mesh.add( wireframe );
         mesh.position.y -= 0.75;
         //mesh.rotation.x = 0.5;
         //mesh.rotation.y = 0.5;
@@ -275,9 +277,9 @@
 
        //### OBJ2 - Wireframe
       var geoT = new THREE.EdgesGeometry( customObject.geometry ); // or WireframeGeometry
-      var matT = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 10 } );
+      var matT = new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 1 } );
       var wireframeT = new THREE.LineSegments( geoT, matT );
-      customObject.add( wireframeT );
+      //customObject.add( wireframeT );
       customObject.position.y += 0.75;
       scene.add( customObject );
 
