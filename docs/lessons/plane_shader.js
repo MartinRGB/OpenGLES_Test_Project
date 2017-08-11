@@ -19,7 +19,6 @@ function init() {
 
   camera = new THREE.Camera();
   camera.position.z = 1;
-  controls = new THREE.OrbitControls(camera)
 
 
 
@@ -48,6 +47,8 @@ function init() {
   renderer = new THREE.WebGLRenderer();
   container.appendChild( renderer.domElement );
   renderer.setSize( body.offsetWidth, body.offsetWidth*aspectRatio);
+
+  controls = new THREE.OrbitControls(camera,renderer.domElement)
 
   onWindowResize();
 

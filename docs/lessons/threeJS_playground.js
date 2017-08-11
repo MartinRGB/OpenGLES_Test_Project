@@ -66,7 +66,7 @@
     canvasContainer.appendChild( renderer.domElement );
     
     //Oribit
-    controls = new THREE.OrbitControls(camera)
+    controls = new THREE.OrbitControls(camera,renderer.domElement)
     //Zoom
     addZoomCondition()
 
