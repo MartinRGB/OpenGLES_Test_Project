@@ -16,16 +16,25 @@
   var objectLoader = new THREE.ObjectLoader();
   var customObject;
 
-  //TextureLoader
+  // TextureLoader
   var textureLoader = new THREE.TextureLoader();
   var customTexture;
 
+  // DAT GUI
+  var options;
+  var gui = new dat.GUI({ autoPlace: false });
+  var color = gui.addFolder('Color');
+  var cam = gui.addFolder('Camera');
+  var teapot = gui.addFolder('Teapot');
+  var cone = gui.addFolder('Cone');
+
   init();
   animate();
-  // setDATGU();
-
 
   function init() {
+
+    var canvasContainer = document.getElementById(canvasContainerId);
+    var body = document.getElementById(bodyId);
 
     //Load & Highlight Code
     loadHighlightCode()
@@ -39,32 +48,110 @@
     camera.position.z = 5;
     runtime.registerCamera( camera );
 
-    //Oribit
-    controls = new THREE.OrbitControls(camera)
-    controls.enableZoom = false;
 
     // Load Custom Texure Obj || Custom Shader & Shape Obj
     loadShaer()
     loadTexture()
     loadObject()
 
+
+    //DAT GUI
+    loadDATGUI()
+
     //Render
-    var body = document.getElementById(bodyId);
-    var canvasContainer = document.getElementById(canvasContainerId);
     renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setClearColor( 0x000000, 1 );
     renderer.setSize((body.offsetWidth-40),(body.offsetWidth-40)*aspectRatio);
     canvasContainer.appendChild( renderer.domElement );
+    
+    //Oribit
+    controls = new THREE.OrbitControls(camera)
+    //Zoom
+    addZoomCondition()
 
     //Lights
     addLight()
 
-    //Zoom
-    addZoomCondition()
-
     //Resize
     resizeWindow()
+
+  }
+
+  function loadDATGUI() {
+    options = {
+      color:{
+        background: "#3f403b"
+      },
+      camera: {
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
+        positionX: 0,
+        positionY: 0,
+        positionZ: 0
+      },
+      teapot:{
+        //positionY: 0.75,
+      },
+      cone:{
+        //positionY: -0.75,
+      },
+      reset: function() {
+        camera.rotation.x = 0;
+        camera.rotation.y = 0;
+        camera.rotation.z = 0;
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = 5;
+        mesh.position.y = -0.75;
+        mesh.scale.x = 1;
+        mesh.scale.y = 1;
+        mesh.scale.z = 1;
+        customObject.position.y = 0.75;
+        customObject.scale.x = 1;
+        customObject.scale.y = 1;
+        customObject.scale.z = 1;
+        mesh.material.wireframe = false;
+        customObject.material.wireframe = false;
+      }
+    }
+
+    gui.domElement.style.right = (window.innerWidth - body.offsetWidth+40)/2 + 'px';
+    gui.domElement.style.position = "absolute";
+    color.addColor(options.color,'background').listen();
+    cam.add(options.camera, 'rotationX', 0, 50).listen();
+    cam.add(options.camera, 'rotationY', 0, 50).listen();
+    cam.add(options.camera, 'rotationZ', 0, 50).listen();
+    cam.add(options.camera, 'positionX', 0, 50).listen();
+    cam.add(options.camera, 'positionY', 0, 50).listen();
+    cam.add(options.camera, 'positionZ', 0, 50).listen();
+    gui.add(options, 'reset');
+    gui.close()
+    canvasContainer.appendChild( gui.domElement );
+  }
+
+  function animate() {
+
+    requestAnimationFrame( animate );
+
+    //listen
+    options.camera.rotationX = camera.rotation.x
+    options.camera.rotationY = camera.rotation.y
+    options.camera.rotationZ = camera.rotation.z
+    options.camera.positionX = camera.position.x
+    options.camera.positionY = camera.position.y
+    options.camera.positionZ = camera.position.z
+
+    renderer.setClearColor( options.color.background, 1 );
+
+    //### Uniform update can refer this - https://github.com/AndrewRayCode/ShaderFrog-Runtime
+    time = clock.getElapsedTime();
+    runtime.updateShaders(time);
+    // mesh.rotation.x += 0.005;
+    // mesh.rotation.y += 0.005;
+
+    renderer.render( scene, camera );
 
   }
 
@@ -159,6 +246,12 @@
         //mesh.rotation.x = 0.5;
         //mesh.rotation.y = 0.5;
         scene.add( mesh );
+
+        cone.add(mesh.position, 'y', -2, 0).name('positionY').listen();
+        cone.add(mesh.scale, 'x', 0, 3).name('width').listen();
+        cone.add(mesh.scale, 'y', 0, 3).name('height').listen();
+        cone.add(mesh.scale, 'z', 0, 3).name('length').listen();
+        cone.add(mesh.material, 'wireframe').listen();
         
       },
       // Function called when download progresses
@@ -187,22 +280,14 @@
       customObject.add( wireframeT );
       customObject.position.y += 0.75;
       scene.add( customObject );
+
+      teapot.add(customObject.position, 'y', 0, 2).name('positionY').listen();
+      teapot.add(customObject.scale, 'x', 0, 3).name('width').listen();
+      teapot.add(customObject.scale, 'y', 0, 3).name('height').listen();
+      teapot.add(customObject.scale, 'z', 0, 3).name('length').listen();
+      teapot.add(customObject.material, 'wireframe').listen();
     } );
     // END Clara.io JSON loader code
-  }
-
-  function animate() {
-
-    requestAnimationFrame( animate );
-
-    time = clock.getElapsedTime();
-    //### Uniform update can refer this - https://github.com/AndrewRayCode/ShaderFrog-Runtime
-    runtime.updateShaders(time);
-    // mesh.rotation.x += 0.005;
-    // mesh.rotation.y += 0.005;
-
-    renderer.render( scene, camera );
-
   }
 
   // function setDATGU(){
@@ -224,17 +309,28 @@
   }
 
   function addZoomCondition(){
-    canvasContainer.onmouseover = function(){
+    controls.enableZoom = false;
+    controls.enableRotate = false;
+    controls.enablePan = false;
+    renderer.domElement.onmouseover = function(){
       controls.enableZoom = true;
+      controls.enableRotate = true;
+      controls.enablePan = true;
     }
-    canvasContainer.onmouseleave = function(){
+    renderer.domElement.onmouseleave = function(){
       controls.enableZoom = false;
+      controls.enableRotate = false;
+      controls.enablePan = false;
     }
+
   }
 
   function resizeWindow(){
     window.addEventListener("resize", function() {
     renderer.setSize((body.offsetWidth-40),(body.offsetWidth-40)*aspectRatio);
+    gui.domElement.style.right = (window.innerWidth - body.offsetWidth+40)/2 + 'px';
     });
   }
+
+
 
