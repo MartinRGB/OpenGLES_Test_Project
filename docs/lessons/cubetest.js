@@ -11,8 +11,9 @@
 
 
   runtime.load([
-      'https://raw.githubusercontent.com/AndrewRayCode/ShaderFrog-Runtime/master/example/Water_or_Oil.json',
-      'https://raw.githubusercontent.com/MartinRGB/OpenGL_Shading_Launguage_Notes/master/docs/jsons/perfrag_light.json'
+      // 'https://raw.githubusercontent.com/MartinRGB/OpenGL_Shading_Launguage_Notes/master/docs/jsons/Water_or_Oil.json'
+      '../jsons/perfrag_light.json'
+      // '../jsons/Water_or_Oil.json'
   ], function( shaders ) {
 
       materialTopShader = runtime.get( shaders[0].name );
@@ -79,8 +80,8 @@
 
     time = clock.getElapsedTime();
     runtime.updateShaders( time );
-    //mesh.rotation.x = time;
-    //mesh.rotation.y += 0.02;
+    mesh.rotation.x = time;
+    mesh.rotation.y += 0.02;
 
     renderer.render( scene, camera );
 
