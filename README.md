@@ -1,2 +1,5 @@
-# OpenGL_Shading_Launguage_Notes
-OpenGL 着色语言读书笔记和 Web 链接
+# OpenGL_Online_Notes
+
+OpenGL 读书笔记汇总，和 Web 承载实验
+
+
