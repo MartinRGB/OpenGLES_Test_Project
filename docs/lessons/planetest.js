@@ -5,7 +5,7 @@ var startTime;
 
 var container = document.getElementById( 'canvasContainer' );
 var body = document.getElementById('body');
-var aspectRatio = 0.75;
+var aspectRatio = 1;
 
 init();
 animate();
@@ -19,24 +19,31 @@ function init() {
 
   camera = new THREE.Camera();
   camera.position.z = 1;
+  controls = new THREE.OrbitControls(camera)
+
+
 
   uniforms = {
     iGlobalTime: { type: "f", value: 1.0 },
     iResolution: { type: "v2", value: new THREE.Vector2() }
   };
 
-  geometry = new THREE.PlaneBufferGeometry( 2., 2. );
+
+  geometry = new THREE.BoxGeometry( 1., 1.,1. );
 
   material = new THREE.ShaderMaterial( {
-
+    color: 0xff0000,
     uniforms: uniforms,
     vertexShader: document.getElementById( 'vertexShader' ).textContent,
-    fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+    fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+    side: THREE.DoubleSide,
+    wireframe: false
 
   } );
 
   mesh = new THREE.Mesh( geometry, material );
   scene.add( mesh );
+
 
   renderer = new THREE.WebGLRenderer();
   container.appendChild( renderer.domElement );
@@ -61,8 +68,6 @@ function animate() {
 
   requestAnimationFrame( animate );
 
-  mesh.rotation.x += 0.1;
-  mesh.rotation.y += 0.2;
 
   render();
 

@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+// import * as THREE from 'three';
 
 let defaultThreeUniforms = [
     'normalMatrix', 'viewMatrix', 'projectionMatrix', 'position', 'normal',
@@ -323,4 +323,4 @@ function omit( obj, ...keys ) {
     return cloned;
 }
 
-export default ShaderRuntime;
+// export default ShaderRuntime;
