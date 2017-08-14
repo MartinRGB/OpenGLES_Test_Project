@@ -184,7 +184,7 @@
 
     // Get code from local file
     var txtFile = new XMLHttpRequest();
-    txtFile.open("GET", "../codes/light_frag.glsl", true);
+    txtFile.open("GET", "../codes/default_shader.glsl", true);
     txtFile.onreadystatechange = function() {
       if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
         if (txtFile.status === 200) {  // Makes sure it's found the file.
