@@ -45,7 +45,7 @@
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 75, 1/aspectRatio, 1, -1 );
     camera.position.z = 2.5;
-    camera.position.y = 1;
+    camera.position.y = 0;
     runtime.registerCamera( camera );
 
 
@@ -87,8 +87,8 @@
         rotationY: 0,
         rotationZ: 0,
         positionX: 0,
-        positionY: 0,
-        positionZ: 0
+        positionY: 1,
+        positionZ: 2.5
       },
       teapot:{
         //positionY: 0.75,
@@ -100,18 +100,13 @@
         camera.rotation.x = 0;
         camera.rotation.y = 0;
         camera.rotation.z = 0;
+        customObject.position.y = -0.75;
         camera.position.x = 0;
         camera.position.y = 0;
-        camera.position.z = 5;
-        mesh.position.y = 0;
-        mesh.scale.x = 1;
-        mesh.scale.y = 1;
-        mesh.scale.z = 1;
-        customObject.position.y = 0;
+        camera.position.z = 2.5;
         customObject.scale.x = 1;
         customObject.scale.y = 1;
         customObject.scale.z = 1;
-        mesh.material.wireframe = false;
         customObject.material.wireframe = false;
       }
     }
@@ -230,7 +225,7 @@
       customObject = obj
       customObject.material = customShader
 
-      customObject.position.y -= 0.75;
+      customObject.position.y = -0.75;
       scene.add( customObject );
 
       teapot.add(customObject.position, 'y', 0, 2).name('positionY').listen();
