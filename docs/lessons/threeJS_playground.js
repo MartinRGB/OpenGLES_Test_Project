@@ -98,12 +98,7 @@
         //positionY: -0.75,
       },
       reset: function() {
-        camera.rotation.x = 0;
-        camera.rotation.y = 0;
-        camera.rotation.z = 0;
-        camera.position.x = 0;
-        camera.position.y = 0;
-        camera.position.z = 5;
+        controls.reset();
         mesh.position.y = -0.75;
         mesh.scale.x = 1;
         mesh.scale.y = 1;

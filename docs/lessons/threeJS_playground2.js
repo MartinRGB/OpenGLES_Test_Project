@@ -66,6 +66,7 @@
     
     //Oribit
     controls = new THREE.OrbitControls(camera,renderer.domElement)
+    controls.reset;
     //Zoom
     addZoomCondition()
 
@@ -97,13 +98,8 @@
         //positionY: -0.75,
       },
       reset: function() {
-        camera.rotation.x = 0;
-        camera.rotation.y = 0;
-        camera.rotation.z = 0;
+        controls.reset();
         customObject.position.y = -0.75;
-        camera.position.x = 0;
-        camera.position.y = 0;
-        camera.position.z = 2.5;
         customObject.scale.x = 1;
         customObject.scale.y = 1;
         customObject.scale.z = 1;
@@ -167,6 +163,15 @@
 
     requestAnimationFrame( animate );
   }
+
+  // this.resetCamera = function ( ) {
+  //       this.object.position.x= camera_initial_position.xPosition;
+  //       this.object.position.y = camera_initial_position.yPosition;
+  //       this.object.position.z = camera_initial_position.zPosition;
+  //       this.center.x= camera_initial_target.x;
+  //       this.center.y= camera_initial_target.y;
+  //       this.center.z= camera_initial_target.z;
+  // };
 
   function loadHighlightCode(){
     var pre=document.createElement('pre');
