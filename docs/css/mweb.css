@@ -720,7 +720,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-comment,
-.diff .hljs-header {
+.diff .hljs-header,
+.hljs-quote {
   color: #998;
   font-style: italic;
 }
@@ -731,13 +732,18 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .nginx .hljs-title,
 .hljs-subst,
 .hljs-request,
-.hljs-status {
+.hljs-status,
+.hljs-selector-tag {
   color: #333;
   font-weight: bold;
 }
 
 .hljs-number,
 .hljs-hexcolor,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr,
 .ruby .hljs-constant {
   color: #008080;
 }
@@ -751,7 +757,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .hljs-title,
 .hljs-id,
-.scss .hljs-preprocessor {
+.scss .hljs-preprocessor,
+.hljs-section,
+.hljs-selector-id {
   color: #900;
   font-weight: bold;
 }
@@ -770,6 +778,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-tag,
+.hljs-name,
+.hljs-attribute,
 .hljs-tag .hljs-title,
 .hljs-rule .hljs-property,
 .django .hljs-tag .hljs-keyword {
@@ -784,7 +794,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   color: #008080;
 }
 
-.hljs-regexp {
+.hljs-regexp,
+.hljs-link  {
   color: #009926;
 }
 
@@ -794,11 +805,13 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .clojure .hljs-keyword,
 .scheme .hljs-keyword,
 .tex .hljs-special,
-.hljs-prompt {
+.hljs-prompt,
+.hljs-bullet {
   color: #990073;
 }
 
-.hljs-built_in {
+.hljs-built_in,
+.hljs-builtin-name {
   color: #0086b3;
 }
 
@@ -826,6 +839,19 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 .hljs-chunk {
   color: #aaa;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
 }
 
  @media print{ .hljs{overflow: visible; word-wrap: break-word !important;} }
