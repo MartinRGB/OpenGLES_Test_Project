@@ -1,7 +1,4 @@
-/**
-* Example Fragment Shader
-* Sets the color and alpha of the pixel by setting gl_FragColor
-*/
+// Example Fragment Shader
 
 // Set the precision for data types used in this shader
 precision highp float;

@@ -4,7 +4,8 @@
   // HTML Port
   var bodyId = "body"
   var canvasContainerId = "canvasContainer"
-  var codeContainerId = "codeContainer"
+  var glslCodeContainerId = "glslCodeContainer"
+  var cppCodeContainerId = "cppCodeContainer"
   var aspectRatio = 0.75;
 
   // ShaderLoader
@@ -165,36 +166,62 @@
   }
 
   function loadHighlightCode(){
-    var pre=document.createElement('pre');
-    var code=document.createElement('code');
-    code.className += "language-glsl"
+    var glslpre=document.createElement('pre');
+    var glslcode=document.createElement('code');
+    glslcode.className += "language-glsl"
     // code.innerText = '../codes/light.glsl'
-    pre.appendChild(code)
-    var codeContainer = document.getElementById(codeContainerId);
-    codeContainer.appendChild( pre );
+    glslpre.appendChild(glslcode)
+    var glslCodeContainer = document.getElementById(glslCodeContainerId);
+    glslCodeContainer.appendChild( glslpre );
 
-    // Get code from local file
-    var txtFile = new XMLHttpRequest();
-    txtFile.open("GET", "../codes/default_shader.glsl", true);
-    txtFile.onreadystatechange = function() {
-      if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
-        if (txtFile.status === 200) {  // Makes sure it's found the file.
-          allText = txtFile.responseText; 
+    // Get glsl code from local file
+    var glslTxtFile = new XMLHttpRequest();
+    glslTxtFile.open("GET", "../codes/default_shader.glsl", true);
+    glslTxtFile.onreadystatechange = function() {
+      if (glslTxtFile.readyState === 4) {  // Makes sure the document is ready to parse.
+        if (glslTxtFile.status === 200) {  // Makes sure it's found the file.
+          allText = glslTxtFile.responseText; 
           //lines = txtFile.responseText.split("\n"); // Will separate each line into an array
           var customTextElement = document.getElementById('textHolder');
-          code.innerHTML = txtFile.responseText;
+          glslcode.innerHTML = glslTxtFile.responseText;
         }
       }
     }
-    txtFile.send(null);
+    glslTxtFile.send(null);
+
+
+    var cpppre=document.createElement('pre');
+    var cppcode=document.createElement('code');
+    cppcode.className += "language-glsl"
+    // code.innerText = '../codes/light.glsl'
+    cpppre.appendChild(cppcode)
+    var cppCodeContainer = document.getElementById(cppCodeContainerId);
+    cppCodeContainer.appendChild( cpppre );
+
+    // Get glsl code from local file
+    var cppTxtFile = new XMLHttpRequest();
+    cppTxtFile.open("GET", "../codes/triangles.cpp", true);
+    cppTxtFile.onreadystatechange = function() {
+      if (cppTxtFile.readyState === 4) {  // Makes sure the document is ready to parse.
+        if (cppTxtFile.status === 200) {  // Makes sure it's found the file.
+          allText = cppTxtFile.responseText; 
+          //lines = txtFile.responseText.split("\n"); // Will separate each line into an array
+          var customTextElement = document.getElementById('textHolder');
+          cppcode.innerHTML = cppTxtFile.responseText;
+        }
+      }
+    }
+    cppTxtFile.send(null);
+
 
     // Add Highlight
-    // window.onload = function() {
-    //   var aCodes = document.getElementsByTagName('pre');
-    //   for (var i=0; i < aCodes.length; i++) {
-    //       hljs.highlightBlock(aCodes[i]);
-    //   }
-    // };
+    window.onload = function() {
+      var aCodes = document.getElementsByTagName('pre');
+      for (var i=0; i < aCodes.length; i++) {
+          hljs.highlightBlock(aCodes[i]);
+          hljs.lineNumbersBlock(aCodes[i]);
+      }
+    };
   
   }
 

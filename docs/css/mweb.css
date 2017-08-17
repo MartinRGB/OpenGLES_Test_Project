@@ -400,17 +400,17 @@ body {
 
 .markdown-body table th,
 .markdown-body table td {
-  padding: 6px 13px;
-  border: 1px solid #ddd;
+  padding: 4px 13px; /*6px 13px*/
+  /* border: 1px solid #ddd; */
 }
 
 .markdown-body table tr {
-  background-color: #fff;
-  border-top: 1px solid #ccc;
+  /* background-color: #fff;
+  border-top: 1px solid #ccc; */
 }
 
 .markdown-body table tr:nth-child(2n) {
-  background-color: #f8f8f8;
+  /* background-color: #f8f8f8; */
 }
 
 .markdown-body img {
@@ -452,10 +452,11 @@ body {
 .markdown-body .highlight pre,
 .markdown-body pre {
   padding: 16px;
+  padding-bottom: 0px;
   overflow: auto;
   font-size: 85%;
-  line-height: 1.45;
-  background-color: #f7f7f7;
+  /* line-height: 1.45; */
+  /* background-color: #f7f7f7;  4 real hljs*/
   border-radius: 3px;
 }
 
@@ -823,6 +824,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 .hljs-cdata {
   color: #999;
   font-weight: bold;
+}
+
+.hljs-ln-n:before {
+  color: #5c6370;
 }
 
 .hljs-deletion {

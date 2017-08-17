@@ -1,7 +1,7 @@
 /**
 * Example Fragment Shader
 * Sets the color and alpha of the pixel by setting gl_FragColor
-*/
+**/
 
 // Set the precision for data types used in this shader
 precision highp float;
@@ -39,7 +39,6 @@ void main() {
 
     // Calculate the normal including the model rotation and scale
     vec3 worldNormal = normalize( vec3( modelMatrix * vec4( vNormal, 0.0 ) ) );
-
     vec3 lightVector = normalize( lightPosition + vec3(cos(time*4.)*2.,0.,sin(time*4.)*2.) - worldPosition );
 
     // An example simple lighting effect, taking the dot product of the normal
