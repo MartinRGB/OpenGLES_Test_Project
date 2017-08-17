@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>动态壁纸</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type='text/javascript' src='js/jquery-2.1.0.min.js'></script>
+	<script type='text/javascript' src='js/rebound.js'></script>
+	<script type='text/javascript' src='js/functions.js'></script>
+	<script type="text/javascript" src="js/GlslCanvas.js"></script>
+	<link rel="shortcut icon" href="url(asset/favicon.ico)" />
+
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+</head>
+<body>
+
+<div id="wrapper">
+	
+	<canvas id="particlecanvas"></canvas>
+
+	<script src="js/particle.js"></script>
+
+	<ul id="slides">
+	  	<li class="shadertemplate">
+	  		<canvas class="glslCanvas" id="canvas" data-fragment-url="https://gist.githubusercontent.com/MartinRGB/1148c22d7189ec2a78e32beca4ce45fd/raw/5073d18ae6ef77632f494df1c5e68a814c7d3d98/frag_trigone0.frag" width="1080" height="1920">
+	  		</canvas>
+
+	  	</li>
+
+	  	<li class="shadertemplate">
+	  		<canvas class="glslCanvas" id="canvas" data-fragment-url="https://gist.githubusercontent.com/MartinRGB/1148c22d7189ec2a78e32beca4ce45fd/raw/5073d18ae6ef77632f494df1c5e68a814c7d3d98/frag_trigone1.frag" width="1080" height="1920">
+	  		</canvas>
+	  	</li>
+
+		<li class="shadertemplate">
+	  		<canvas class="glslCanvas" data-fragment-url="https://gist.githubusercontent.com/MartinRGB/1148c22d7189ec2a78e32beca4ce45fd/raw/5073d18ae6ef77632f494df1c5e68a814c7d3d98/frag_liquid.glsl" width="1080" height="1920">
+	  		</canvas>
+	  	</li>
+
+		<li class="shadertemplate">
+	  		<canvas class="glslCanvas" data-fragment-url="https://gist.githubusercontent.com/MartinRGB/1148c22d7189ec2a78e32beca4ce45fd/raw/5073d18ae6ef77632f494df1c5e68a814c7d3d98/frag_foggy.glsl" width="1080" height="1920">
+	  		</canvas>
+	  	</li>
+
+		<li class="shadertemplate">
+	  		<canvas class="glslCanvas" data-fragment-url="https://gist.githubusercontent.com/MartinRGB/1148c22d7189ec2a78e32beca4ce45fd/raw/5073d18ae6ef77632f494df1c5e68a814c7d3d98/frag_circle.glsl" width="1080" height="1920">
+	  		</canvas>
+	  	</li>
+
+		<li class="shadertemplate">
+	  		<canvas class="glslCanvas" data-fragment-url="https://gist.githubusercontent.com/MartinRGB/1148c22d7189ec2a78e32beca4ce45fd/raw/5073d18ae6ef77632f494df1c5e68a814c7d3d98/frag_line.glsl" width="1080" height="1920">
+	  		</canvas>
+	  	</li>
+
+		<li class="shadertemplate">
+	  		<canvas class="glslCanvas" data-fragment-url="https://gist.githubusercontent.com/MartinRGB/1148c22d7189ec2a78e32beca4ce45fd/raw/1a89df54e40277302758098d75f43df3e933d31a/frag_galaxy.glsl" width="1080" height="1920">
+	  		</canvas>
+	  	</li>
+
+  		 <li class="shadertemplate">
+	  		<canvas class="glslCanvas" data-fragment-url="https://gist.githubusercontent.com/MartinRGB/1148c22d7189ec2a78e32beca4ce45fd/raw/1900515d6add3d5777205cfac9d8c22aa733ad86/frag_oilpaint" width="1080" height="1920">
+	  		</canvas>
+	  	</li>
+
+	  	
+	  	
+	  	
+
+	  		  	
+	</ul>
+
+
+	<script type="text/javascript" src="js/stats.min.js"></script>
+	<script type="text/javascript">
+			var array = [];
+
+			for ( var i = 0; i < 3; i ++ ) {
+
+				var stats = new Stats();
+				stats.showPanel(i);
+				stats.dom.style.position = 'relative';
+				stats.dom.style.float = 'left';
+				document.body.appendChild( stats.dom );
+
+				array.push( stats );
+
+			}
+
+			function animate() {
+
+				for ( var i = 0; i < array.length; i ++ ) {
+
+					var stats = array[ i ];
+					stats.update();
+
+				}
+
+				requestAnimationFrame( animate );
+
+			}
+
+			animate();
+      </script>
+
+	<ul id="nav">
+		<li class="paper">Trigon-I</li>
+		<li class="paper">Trigon-II</li>
+		<li class="paper">Liquid</li>
+		<li class="paper">Foggy</li>
+		<li class="paper">Circle</li>
+		<li class="paper">Line</li>
+		<li class="paper">Galaxy</li>
+		<li class="paper">Oil Painting</li>
+
+	</ul>
+	
+	<div class="fade" id="leftFade"></div>
+	<div class="fade" id="rightFade"></div>
+	
+</div>
+
+</body>
+</html>
+
