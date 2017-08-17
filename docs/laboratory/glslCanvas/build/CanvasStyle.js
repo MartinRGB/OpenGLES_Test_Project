@@ -110,19 +110,19 @@ var glslCanvas = [];
 var glslEditors = [];
 var glslGraphs = [];
 
-function styleCodeBlocks() {
-    // Highlight code blocks
-    var list = document.getElementsByTagName("code");
-    for(var i = 0; i < list.length; i++){
-        if (list[i].className == "language-glsl" ||
-            list[i].className == "language-bash" ||
-            list[i].className == "language-cpp" ||
-            list[i].className == "language-html" ||
-            list[i].className == "language-processing" ){
-            hljs.highlightBlock(list[i]);
-        }
-    }
-}
+// function styleCodeBlocks() {
+//     // Highlight code blocks
+//     var list = document.getElementsByTagName("code");
+//     for(var i = 0; i < list.length; i++){
+//         if (list[i].className == "language-glsl" ||
+//             list[i].className == "language-bash" ||
+//             list[i].className == "language-cpp" ||
+//             list[i].className == "language-html" ||
+//             list[i].className == "language-processing" ){
+//             hljs.highlightBlock(list[i]);
+//         }
+//     }
+// }
 
 function loadGlslElements() {
 

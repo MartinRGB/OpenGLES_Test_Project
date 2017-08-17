@@ -164,15 +164,6 @@
     requestAnimationFrame( animate );
   }
 
-  // this.resetCamera = function ( ) {
-  //       this.object.position.x= camera_initial_position.xPosition;
-  //       this.object.position.y = camera_initial_position.yPosition;
-  //       this.object.position.z = camera_initial_position.zPosition;
-  //       this.center.x= camera_initial_target.x;
-  //       this.center.y= camera_initial_target.y;
-  //       this.center.z= camera_initial_target.z;
-  // };
-
   function loadHighlightCode(){
     var pre=document.createElement('pre');
     var code=document.createElement('code');
@@ -198,12 +189,12 @@
     txtFile.send(null);
 
     // Add Highlight
-    window.onload = function() {
-      var aCodes = document.getElementsByTagName('pre');
-      for (var i=0; i < aCodes.length; i++) {
-          hljs.highlightBlock(aCodes[i]);
-      }
-    };
+    // window.onload = function() {
+    //   var aCodes = document.getElementsByTagName('pre');
+    //   for (var i=0; i < aCodes.length; i++) {
+    //       hljs.highlightBlock(aCodes[i]);
+    //   }
+    // };
   
   }
 
@@ -216,7 +207,8 @@
 
         //### OBJ1 - Shader
         customShader = runtime.get( shaders[0].name );
-        customShader.uniforms.u_texture.value = THREE.ImageUtils.loadTexture( '../textures/jade.jpg' );
+        // No texture Uniform in this example
+        //customShader.uniforms.u_texture.value = THREE.ImageUtils.loadTexture( '../textures/jade.jpg' );
         //mesh.material = customShader
     });
   }
@@ -275,8 +267,8 @@
 
   function resizeWindow(){
     window.addEventListener("resize", function() {
-    renderer.setSize((body.offsetWidth-40),(body.offsetWidth-40)*aspectRatio);
-    gui.domElement.style.right = (window.innerWidth - body.offsetWidth+40)/2 + 'px';
+      renderer.setSize((body.offsetWidth-40),(body.offsetWidth-40)*aspectRatio);
+      gui.domElement.style.right = (window.innerWidth - body.offsetWidth+40)/2 + 'px';
     });
   }
 
