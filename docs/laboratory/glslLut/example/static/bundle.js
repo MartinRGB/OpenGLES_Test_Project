@@ -14,6 +14,8 @@ document.body.style.margin = "0";
 var img1 = new Image(); // HTML5 Constructor
 img1.src = 'tahoe-sunset.jpg';
 img1.alt = 'alt';
+img1.width = 512;
+img1.height = 512;
 //document.body.appendChild(img1);
 
 var gl = createContext(canvas, render)
