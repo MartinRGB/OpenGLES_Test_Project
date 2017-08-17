@@ -32,7 +32,7 @@
     loadHighlightCode("language-glsl","../codes/default_shader.glsl",glslCodeContainerId);
     loadHighlightCode("language-cpp","../codes/triangles.cpp",cppCodeContainerId);
     loadStatsUI(canvasContainer)
-    loadDATGUI(gui,customObject)
+    loadDATGUI(gui,customObject,reset)
 
     // Scene & Cam & Tex
     scene = new THREE.Scene();
@@ -62,6 +62,15 @@
     addLight(scene)
     resizeWindow(renderer,gui)
 
+  }
+
+  function reset(){
+    controls.reset();
+    customObject.scale.x = 1.;
+    customObject.scale.y = 1.;
+    customObject.scale.z = 1.;
+    customObject.material.wireframe = false;
+    customObject.position.y = 0.;
   }
 
 

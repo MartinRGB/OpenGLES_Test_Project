@@ -195,7 +195,7 @@
 
   // DATGUI
   var options;
-  function loadDATGUI(gui,obj) {
+  function loadDATGUI(gui,obj,reset) {
 
 
     var color = gui.addFolder('Color');
@@ -216,11 +216,7 @@
         //positionY: 0.75,
       },
       reset: function() {
-        controls.reset();
-        obj.scale.x = 1.;
-        obj.scale.y = 1.;
-        obj.scale.z = 1.;
-        obj.material.wireframe = false;
+        reset()
       }
     }
 

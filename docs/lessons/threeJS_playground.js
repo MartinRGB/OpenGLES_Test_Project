@@ -37,7 +37,7 @@
     var body = document.getElementById(bodyId);
 
     //Load & Highlight Code
-    loadHighlightCode()
+    loadHighlightCode("language-glsl","../codes/light_frag.glsl",codeContainerId);
 
     //Stats
     loadStatsUI()
@@ -169,39 +169,39 @@
     requestAnimationFrame( animate );
   }
 
-  function loadHighlightCode(){
-    var pre=document.createElement('pre');
-    var code=document.createElement('code');
-    code.className += "language-glsl"
-    // code.innerText = '../codes/light.glsl'
-    pre.appendChild(code)
-    var codeContainer = document.getElementById(codeContainerId);
-    codeContainer.appendChild( pre );
+  // function loadHighlightCode(){
+  //   var pre=document.createElement('pre');
+  //   var code=document.createElement('code');
+  //   code.className += "language-glsl"
+  //   // code.innerText = '../codes/light.glsl'
+  //   pre.appendChild(code)
+  //   var codeContainer = document.getElementById(codeContainerId);
+  //   codeContainer.appendChild( pre );
 
-    // Get code from local file
-    var txtFile = new XMLHttpRequest();
-    txtFile.open("GET", "../codes/light_frag.glsl", true);
-    txtFile.onreadystatechange = function() {
-      if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
-        if (txtFile.status === 200) {  // Makes sure it's found the file.
-          allText = txtFile.responseText; 
-          //lines = txtFile.responseText.split("\n"); // Will separate each line into an array
-          var customTextElement = document.getElementById('textHolder');
-          code.innerHTML = txtFile.responseText;
-        }
-      }
-    }
-    txtFile.send(null);
+  //   // Get code from local file
+  //   var txtFile = new XMLHttpRequest();
+  //   txtFile.open("GET", "../codes/light_frag.glsl", true);
+  //   txtFile.onreadystatechange = function() {
+  //     if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
+  //       if (txtFile.status === 200) {  // Makes sure it's found the file.
+  //         allText = txtFile.responseText; 
+  //         //lines = txtFile.responseText.split("\n"); // Will separate each line into an array
+  //         var customTextElement = document.getElementById('textHolder');
+  //         code.innerHTML = txtFile.responseText;
+  //       }
+  //     }
+  //   }
+  //   txtFile.send(null);
 
-    // Add Highlight
-    window.onload = function() {
-      var aCodes = document.getElementsByTagName('pre');
-      for (var i=0; i < aCodes.length; i++) {
-          hljs.highlightBlock(aCodes[i]);
-      }
-    };
+  //   // Add Highlight
+  //   window.onload = function() {
+  //     var aCodes = document.getElementsByTagName('pre');
+  //     for (var i=0; i < aCodes.length; i++) {
+  //         hljs.highlightBlock(aCodes[i]);
+  //     }
+  //   };
   
-  }
+  // }
 
   function loadShaer(){
     runtime.load([

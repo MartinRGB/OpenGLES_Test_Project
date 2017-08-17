@@ -4,19 +4,21 @@
   <meta charset="utf-8">
   <title>index</title>
   <link rel="stylesheet" href="../css/mweb.css">
-  <link rel="stylesheet" href="../css/hljs/atom-one-light.css">
+  <link rel="stylesheet" href="../css/hljs/atom-one-dark.css"> 
+  <link rel="stylesheet" href="../css/glslEditor.css">
+  <script type="text/javascript" src="../js/GlslCanvas.js"></script>
+  <script type="text/javascript" src="../js/glslEditor.js"></script>
   
 </head>
 
 <body>
 
 <div class="markdown-body" id="body">
-  <h1 id="toc_0">Three.JS Playground</h1>
+  <h1 id="toc_0">Three.JS Playground(normalized)</h1>
 
   <h2 id="toc_1">Introduction</h2>
 
   <p>借助 three.js 对 GLES 的优秀封装，用来制作读书笔记</p>
-
   <ul>
   <li>加载预设 Model</li></br>
   <li>加载导入 Model</li></br>
@@ -28,18 +30,19 @@
   <li>FPS StatsUI</li></br>
   <li>DAT GUI</li>
   </ul>
+  <div id ="graphContainer" class="simpleGraph" data="../codes/brickwallGraph.frag"></div>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique eius ea sequi distinctio autem repellat, libero esse nam. Quam nesciunt nobis iure cupiditate neque hic magnam optio assumenda unde sequi. Rem cumque iure cum reprehenderit repellendus, autem voluptates maxime ipsa numquam libero nobis saepe laudantium amet praesentium voluptatibus, fuga eveniet.</p>
-
+  <div id ="glslCodeContainer_vert"></div>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique eius ea sequi distinctio autem repellat, libero esse nam. Quam nesciunt nobis iure cupiditate neque hic magnam optio assumenda unde sequi. Rem cumque iure cum reprehenderit repellendus, autem voluptates maxime ipsa numquam libero nobis saepe laudantium amet praesentium voluptatibus, fuga eveniet.</p>
-
+  <div id ="glslCodeContainer_frag"></div>
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique eius ea sequi distinctio autem repellat, libero esse nam. Quam nesciunt nobis iure cupiditate neque hic magnam optio assumenda unde sequi. Rem cumque iure cum reprehenderit repellendus, autem voluptates maxime ipsa numquam libero nobis saepe laudantium amet praesentium voluptatibus, fuga eveniet.</p>
-  <div id ="codeContainer"></div>
   <div id ="canvasContainer"></div>
 </div>
 
 
 </body>
 
+  <script src="../js/CanvasStyle.js"></script>
   <script type="text/javascript" src="../js/Stats.js"></script>
   <script type="text/javascript" src="../js/hljs2.js"></script>
   <script type="text/javascript" src="../js/hljs-linenumbers.js"></script>
@@ -47,7 +50,7 @@
   <script src="../js/three.min.js"></script>
   <script type="text/javascript" src="../js/ShaderRuntime.js"></script>
   <script src="../js/OrbitControls.js"></script>
-  <script type="text/javascript" src="../js/utils.js"></script>
-  <script src="threeJS_playground.js"></script>
+  <script src="../js/utils.js"></script>
+  <script src="1.BrickWall.js"></script>
 
 </html>
