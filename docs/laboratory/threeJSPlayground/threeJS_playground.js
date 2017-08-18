@@ -37,7 +37,7 @@
     var body = document.getElementById(bodyId);
 
     //Load & Highlight Code
-    loadHighlightCode("language-glsl","../codes/light_frag.glsl",codeContainerId);
+    loadHighlightCode("language-glsl","../../codes/light_frag.glsl",codeContainerId);
 
     //Stats
     loadStatsUI()
@@ -206,20 +206,20 @@
   function loadShaer(){
     runtime.load([
         // 'https://raw.githubusercontent.com/MartinRGB/OpenGL_Shading_Launguage_Notes/master/docs/jsons/Water_or_Oil.json'
-        '../jsons/perfrag_light.json'
+        '../../jsons/perfrag_light.json'
         //'../jsons/Water_or_Oil.json'
     ], function( shaders ) {
 
         //### OBJ1 - Shader
         customShader = runtime.get( shaders[0].name );
-        customShader.uniforms.u_texture.value = THREE.ImageUtils.loadTexture( '../textures/jade.jpg' );
+        customShader.uniforms.u_texture.value = THREE.ImageUtils.loadTexture( '../../textures/jade.jpg' );
         //mesh.material = customShader
     });
   }
 
   function loadTexture() {
     textureLoader.load(
-      '../textures/metal.jpg',
+      '../../textures/metal.jpg',
       function ( texture ) {
         //### OBJ1 - Shape
         texture.repeat.x = 0.5;
@@ -265,7 +265,7 @@
   function loadObject() {
     // BEGIN Clara.io JSON loader code
     //### OBJ2 - Load Obj
-    objectLoader.load("../models/teapot.json", function ( obj ) {
+    objectLoader.load("../../models/teapot.json", function ( obj ) {
        //### OBJ2 - Shape
       customObject = obj
       customObject.material = customShader

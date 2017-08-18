@@ -29,8 +29,8 @@
     var canvasContainer = document.getElementById(canvasContainerId);
     var body = document.getElementById(bodyId);
 
-    loadHighlightCode("language-glsl","../codes/default_shader.glsl",glslCodeContainerId);
-    loadHighlightCode("language-cpp","../codes/triangles.cpp",cppCodeContainerId);
+    loadHighlightCode("language-glsl","../../codes/default_shader.glsl",glslCodeContainerId);
+    loadHighlightCode("language-cpp","../../codes/triangles.cpp",cppCodeContainerId);
     loadStatsUI(canvasContainer)
     loadDATGUI(gui,customObject,reset)
 
@@ -42,7 +42,7 @@
     runtime.registerCamera( camera );
     //loadMaterialnModel(scene,"../models/stanford-bunny.json",customObject,new THREE.MeshBasicMaterial( { color: 0xffffff, wireframe: true }),objectFolder,0.75)
     
-    loadShadernModel(scene,'../jsons/default_shader.json',"../models/teapot.json",customObject,objectFolder,-0.75)
+    loadShadernModel(scene,'../../jsons/default_shader.json',"../../models/teapot.json",customObject,objectFolder,-0.75)
     //loadTexturenModel(scene,"../models/stanford-bunny.json",'../textures/metal.jpg',customObject,objectFolder,0.);
     scene.add( customObject );
 
