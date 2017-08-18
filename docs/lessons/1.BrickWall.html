@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>index</title>
   <link rel="stylesheet" href="../css/mweb.css">
-  <link rel="stylesheet" href="../css/hljs/atom-one-dark.css"> 
+  <link rel="stylesheet" href="../css/hljs/github-gist.css"> 
   <link rel="stylesheet" href="../css/glslEditor.css">
   <script type="text/javascript" src="../js/GlslCanvas.js"></script>
   <script type="text/javascript" src="../js/glslEditor.js"></script>
@@ -14,28 +14,34 @@
 <body>
 
 <div class="markdown-body" id="body">
-  <h1 id="toc_0">1.Brick Wall</h1>
+  <h1 id="toc_0">1.砖块着色器</h1>
 
-  <h2 id="toc_1">原理</h2>
-
-  <p>借助 three.js 对 GLES 的优秀封装，用来制作读书笔记</p>
+  <h2 id="toc_0">原理</h2>
+  
+  <h3 id="toc_1">需求的总体效果：</h3>
+  
   <ul>
-  <li>加载预设 Model</li></br>
-  <li>加载导入 Model</li></br>
-  <li>加载并高亮代码</li></br>
-  <li>加载导入 Texture</li></br>
-  <li>加载导入 ShaderFrog 文件</li></br>
-  <li>加载导入 Texture 到 Shader</li></br>
-  <li>OribitControl 拖拽移动缩放 Model</li></br>
-  <li>FPS StatsUI</li></br>
-  <li>DAT GUI</li>
+  <li><p>独立光源</p></li>
+  <li><p>满反射(diffuse)和镜面反射(specular)</p></li>
+  <li><p>建模坐标的(x,y)与砖块的水平和垂直位置相关</p></li>
+  <li><p>每一行砖块错开</p></li>
   </ul>
-  <div id ="graphContainer" class="simpleGraph" data="../codes/brickwallGraph.frag"></div>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique eius ea sequi distinctio autem repellat, libero esse nam. Quam nesciunt nobis iure cupiditate neque hic magnam optio assumenda unde sequi. Rem cumque iure cum reprehenderit repellendus, autem voluptates maxime ipsa numquam libero nobis saepe laudantium amet praesentium voluptatibus, fuga eveniet.</p>
+  
+  <p>顶点着色器中的光照模型：</p>
+  
+  <p><img src="media/15030248029371/fig06-02-partialbricks.jpg" alt="fig06-02-partialbricks"/></p>
+  
+  <h3 id="toc_2">基础概念：</h3>
+  
+  <p>向量的模 - <code>向量 AB（AB上面有→）的长度叫做向量的模，记作|AB|(AB上有→）或|a|(a上有→)</code><br/>
+  向量的点积 - <code>点积的计算方式为:  a·b=|a|·|b|cos&lt;a,b&gt;  其中|a|和|b|表示向量的模，&lt;a,b&gt;表示两个向量的夹角。</code></p>
+
+  <h3 id="toc_3">顶点着色器</h3>
   <div id ="glslCodeContainer_vert"></div>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique eius ea sequi distinctio autem repellat, libero esse nam. Quam nesciunt nobis iure cupiditate neque hic magnam optio assumenda unde sequi. Rem cumque iure cum reprehenderit repellendus, autem voluptates maxime ipsa numquam libero nobis saepe laudantium amet praesentium voluptatibus, fuga eveniet.</p>
+  <h3 id="toc_4">片段着色器</h3>
   <div id ="glslCodeContainer_frag"></div>
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique eius ea sequi distinctio autem repellat, libero esse nam. Quam nesciunt nobis iure cupiditate neque hic magnam optio assumenda unde sequi. Rem cumque iure cum reprehenderit repellendus, autem voluptates maxime ipsa numquam libero nobis saepe laudantium amet praesentium voluptatibus, fuga eveniet.</p>
+  <div id ="graphContainer" class="simpleGraph" data="../codes/brickwallGraph.frag"></div>
+  <h3 id="toc_5">最终结果</h3>
   <div id ="canvasContainer"></div>
 </div>
 

@@ -2,4 +2,4 @@
 //You can try these uniforms
 //y = floor(x);
 //y = mod(x,1.5);
-y = floor(mod(x,2.));
+y = step(fract(x),0.9);
