@@ -19,7 +19,7 @@ img1.height = 512;
 //document.body.appendChild(img1);
 
 var gl = createContext(canvas, render)
-var tex = createTex2d(gl, img1)
+var tex = createTex2d(gl, img1) //(gl,lena)
 var lookupTex1 = getTex2D("lookup_selective_color.png");
 var lookupTex2 = getTex2D("lookup_miss_etikate.png");
 var lookupTex = lookupTex1;
